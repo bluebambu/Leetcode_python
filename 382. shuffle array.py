@@ -10,6 +10,7 @@ class Solution:
         pass
 
     def shuffle(self) -> List[int]:
+        pass
 
 
 # Your Solution object will be instantiated and called as such:
