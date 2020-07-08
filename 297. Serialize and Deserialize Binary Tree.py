@@ -1,6 +1,4 @@
 from collections import deque
-from queue import Queue
-from typing import List
 
 
 class TreeNode:
@@ -20,8 +18,10 @@ def lvlOrder(node: TreeNode) -> str:
         if f:
             q.append(f.left)
             q.append(f.right)
-    return ','.join(r)
 
+    s = ','.join(r)
+    print(s)
+    return s
 
 
 class Tree:
@@ -38,7 +38,7 @@ class Tree:
         i += 1
         q = deque()
         q.append(root)
-        while q and i<len(s):
+        while q and i < len(s):
             f = q.popleft()
             if nodes[i] != '#':
                 f.left = TreeNode(nodes[i])
@@ -51,34 +51,37 @@ class Tree:
 
         return root
 
-# 72%
-class Solution:
-    def findDuplicateSubtrees(self, root: TreeNode) -> List[TreeNode]:
-        r = set()
-        cache = {}
 
-        def postOrder(node: TreeNode, r):
-            if not node:
-                return '#'
+# score: 86.5%
+class Codec:
+    def serialize(self, root: TreeNode):
+        if not root:
+            return "#"
+        return ','.join([str(root.val),
+                         self.serialize(root.left),
+                         self.serialize(root.right)])
 
-            serialize = str(node.val)+','+\
-                        postOrder(node.left, r)+','+\
-                        postOrder(node.right, r)
-            if serialize not in cache:
-                cache[serialize] = node
-            else:
-                r.add(cache[serialize])
-            return serialize
+    def deserialize(self, data: str):
+        vals = data.split(',')
+        i = 0
 
-        postOrder(root, r)
-        return r
+        def dfs(vals, i):
+            if i >= len(vals) or vals[i] == '#':
+                return None, i+1
+            cur = TreeNode()
+            cur.val = int(vals[i])
+            i+=1
+            cur.left, i = dfs(vals, i)
+            cur.right, i = dfs(vals, i)
+            return cur, i
 
-
-s = Solution()
-tree = Tree('1,2,3,4,#,2,4,#,#,4,#,#,#,#,#')
-r = s.findDuplicateSubtrees(tree.root)
-for e in r:
-    print(lvlOrder(e))
+        return dfs(vals, i)[0]
 
 
-
+#tree = Tree('1,2,3,4,#,2,4,#,#,4,#,#,#,#,#')
+tree = Tree('1,2,3,#,#,4,5,#,#,#,#')
+codec = Codec()
+s = codec.serialize(tree.root)
+print(s)
+r = codec.deserialize(s)
+lvlOrder(r)
