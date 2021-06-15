@@ -1,5 +1,6 @@
 from collections import deque
 
+DIRS = [[0, 1], [0, -1], [1, 0], [-1, 0]]
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -8,7 +9,7 @@ class TreeNode:
         self.right = right
 
 
-def lvlOrder(node: TreeNode) -> str:
+def lvlOrder(node: TreeNode) -> None:
     q = deque()
     q.append(node)
     r = []
@@ -21,7 +22,7 @@ def lvlOrder(node: TreeNode) -> str:
             if f:
                 q.append(f.left)
                 q.append(f.right)
-        r.append([]+cur)
+        r.append([] + cur)
 
     for l in r:
         print(l)
@@ -34,7 +35,7 @@ class Tree:
     def __init__(self, s: str):
         self.root = self.deserialize(s)
 
-    def deserialize(self, s: str):
+    def deserialize(self, s: str) -> TreeNode:
         nodes = s.split(',')
         i = 0
         root = TreeNode(val=int(nodes[i]))
@@ -53,3 +54,10 @@ class Tree:
             i += 1
 
         return root
+
+
+class Node:
+    def __init__(self, val, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
