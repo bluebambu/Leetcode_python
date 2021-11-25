@@ -1,6 +1,11 @@
 from XiangUtils.xiangUtils import Tree
 
-# score: 
+
+# score:
+class Solution():
+    def canWin(self):
+        pass
+
 
 
 tree = Tree('1,2,3,4,#,2,4,#,#,4,#,#,#,#,#')

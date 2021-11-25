@@ -1,6 +1,7 @@
 import bisect
 from typing import List
-from xiangUtils import TreeNode, Tree, lvlOrder
+from XiangUtils.xiangUtils import Tree
+
 
 # score:  did not pass the last big dataset.
 class Solution2:
