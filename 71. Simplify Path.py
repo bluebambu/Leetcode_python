@@ -3,7 +3,7 @@ from XiangUtils.xiangUtils import Tree
 
 # score: 97.89
 class Solution:
-    def simplifyPath(self, path: str) -> str:
+    def simplifyPath2(self, path: str) -> str:
         elem = path.split('/')
         skipCnt = 0
         res = []
@@ -20,6 +20,8 @@ class Solution:
 
         return '/' if not res else '/'+'/'.join(reversed(res))
 
+    def simplifyPath(self, path: str) -> str:
+        
 
 tree = Tree('1,2,3,4,#,2,4,#,#,4,#,#,#,#,#')
 s = Solution()

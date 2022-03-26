@@ -26,6 +26,8 @@ class Solution:
         print(thru_sum)
         return res
 
+    def subarraySum2(self, nums: List[int], k: int) -> int:
+        pass
 
 
 tree = Tree('1,2,3,4,#,2,4,#,#,4,#,#,#,#,#')
